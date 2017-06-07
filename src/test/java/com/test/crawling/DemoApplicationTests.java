@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,8 +37,10 @@ public class DemoApplicationTests {
         JsonArray dataNode = user.get("media").getAsJsonObject()
                                     .get("nodes").getAsJsonArray();
 
+
         for( int i=0; i<dataNode.size(); i++ ){
             System.out.println( dataNode.get(i).getAsJsonObject().get("caption").getAsString() );
+            System.out.println( new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format( new Date(dataNode.get(i).getAsJsonObject().get("date").getAsLong()*1000L)  ) );
             System.out.println("========= ==========");
         }
 
